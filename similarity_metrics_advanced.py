@@ -1,6 +1,6 @@
 import re
 import math
-
+import utils as u
 def generate_ngrams(words, n):
     """
     Sinh danh sách n-gram từ danh sách từ
@@ -30,7 +30,10 @@ def ngram_similarity(words1, words2, n=2):
     return len(g1 & g2) / len(g1 | g2)
 
 
+
 def compute_tf(words):
+    if u.read_file(words) == False:
+        return False
     tf = {}
     total = len(words)
     for w in words:
@@ -42,6 +45,8 @@ def compute_idf(documents):
     """
     documents: list[list[str]]
     """
+    if u.read_file(documents) == False:
+        return False
     N = len(documents)
     idf = {}
     vocab = set(word for doc in documents for word in doc)
